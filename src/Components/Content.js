@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 // Components
 import Row from "./Row";
+import test_data from "../Data/data.json"
 
 // MUI Stuff
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -67,28 +68,7 @@ const styles = {
 export class Content extends Component {
   state = {
     activeTab: 0,
-    content: [
-      {
-        label: "good",
-        text: "This is good content",
-      },
-      {
-        label: "bad",
-        text: "This is bad content",
-      },
-      {
-        label: "bad",
-        text: "This is bullshit content",
-      },
-      {
-        label: "bad",
-        text: "This is crap content",
-      },
-      {
-        label: "bad",
-        text: "This is shit content",
-      },
-    ],
+    content: test_data,
   };
 
   handlePrimaryClick = () => {
@@ -135,7 +115,7 @@ export class Content extends Component {
           >
             <ImCheckmark className={classes.tabIcon} />
             <Typography variant="body1" className={classes.tabText}>
-              Good
+              Good Report
             </Typography>
           </div>
           <div
@@ -146,21 +126,21 @@ export class Content extends Component {
           >
             <ImCross className={classes.tabIcon} />
             <Typography variant="body1" className={classes.tabText}>
-              Bad
+              Bad Report
             </Typography>
           </div>
         </div>
 
         <div className={classes.content}>
           {activeTab === 0
-            ? content.map((rowData) => <Row content = {rowData.text}/>)
+            ? content.map((rowData) => <Row key = {rowData.id} data = {rowData}/>)
             : activeTab === 1
             ? content.map(
-                (rowData) => rowData.label === "good" && <Row content = {rowData.text}/>
+                (rowData) => rowData.label === "good" && <Row key = {rowData.id} data = {rowData}/>
               )
             : activeTab === 2 &&
               content.map(
-                (rowData) => rowData.label === "bad" && <Row content = {rowData.text}/>
+                (rowData) => rowData.label === "bad" && <Row key = {rowData.id} data = {rowData}/>
               )}
           
         </div>
