@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+// Components
+import Row from "./Row";
+
 // MUI Stuff
 import withStyles from "@material-ui/core/styles/withStyles";
 import Typography from "@material-ui/core/Typography";
@@ -149,15 +152,16 @@ export class Content extends Component {
 
         <div className={classes.content}>
           {activeTab === 0
-            ? content.map((rowData) => <p>{rowData.text}</p>)
+            ? content.map((rowData) => <Row content = {rowData.text}/>)
             : activeTab === 1
             ? content.map(
-                (rowData) => rowData.label === "good" && <p>{rowData.text}</p>
+                (rowData) => rowData.label === "good" && <Row content = {rowData.text}/>
               )
             : activeTab === 2 &&
               content.map(
-                (rowData) => rowData.label === "bad" && <p>{rowData.text}</p>
+                (rowData) => rowData.label === "bad" && <Row content = {rowData.text}/>
               )}
+          
         </div>
       </div>
     );
