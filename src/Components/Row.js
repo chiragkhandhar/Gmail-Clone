@@ -5,11 +5,19 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 const styles = {
   container: {
+    cursor: "pointer",
     display: "flex",
     justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "#111111",
     borderBottom: "1px solid #363636",
+    paddingLeft: "1rem",
+    paddingRight: "1rem",
+    zIndex:0,
+    "&:hover": {
+      zIndex: 2,
+      backgroundColor: "#282828"
+    },
   },
 };
 

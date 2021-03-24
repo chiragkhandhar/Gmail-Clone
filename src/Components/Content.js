@@ -16,6 +16,7 @@ const styles = {
     position: "absolute",
     top: "114px",
     width: "100vw",
+    backgroundColor:"#111111"
   },
   tabBar: {
     position: "fixed",
