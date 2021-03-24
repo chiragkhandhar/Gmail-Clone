@@ -86,6 +86,10 @@ const styles = {
   block3Icon: {
     color: "#FFFFFF",
   },
+
+  avatar: {
+    marginLeft: "1rem",
+  },
 };
 
 export class Navbar extends Component {
@@ -133,7 +137,7 @@ export class Navbar extends Component {
           <IconButton aria-label="menu">
             <IoApps className={classes.block3Icon} />
           </IconButton>
-          <Avatar src="/akash_avatar.jpeg"></Avatar>
+          <Avatar src="/akash_avatar.jpeg" className = {classes.avatar}></Avatar>
         </div>
       </div>
     );

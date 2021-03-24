@@ -3,10 +3,17 @@ import React, { Component } from "react";
 // MUI Stuff
 import withStyles from "@material-ui/core/styles/withStyles";
 import IconButton from "@material-ui/core/IconButton";
-import Typography from '@material-ui/core/Typography';
+import Typography from "@material-ui/core/Typography";
 
 // Icons
-import { MdCheckBoxOutlineBlank, MdRefresh, MdMoreVert, MdChevronLeft, MdChevronRight, MdLineWeight } from "react-icons/md";
+import {
+  MdCheckBoxOutlineBlank,
+  MdRefresh,
+  MdMoreVert,
+  MdChevronLeft,
+  MdChevronRight,
+  MdLineWeight,
+} from "react-icons/md";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 const styles = {
@@ -46,7 +53,7 @@ const styles = {
   splitIcon: {
     color: "#FFFFFF",
     transform: "rotate(180deg)",
-  }
+  },
 };
 export class MenuBar extends Component {
   state = {
@@ -72,11 +79,12 @@ export class MenuBar extends Component {
           </IconButton>
         </div>
         <div className={classes.block3}>
-          <Typography variant="overline" >
-            {`1-50 of ${count}`}
-          </Typography>
+          <Typography variant="overline">{`1-50 of ${count}`}</Typography>
           <IconButton aria-label="menu" size="small" disabled>
-            <MdChevronLeft className={classes.blockIcons} style = {{color: "grey"}}/>
+            <MdChevronLeft
+              className={classes.blockIcons}
+              style={{ color: "grey" }}
+            />
           </IconButton>
           <IconButton aria-label="menu" size="small">
             <MdChevronRight className={classes.blockIcons} />
