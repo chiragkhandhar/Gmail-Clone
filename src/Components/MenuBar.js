@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
+import Link from "@material-ui/core/Link";
 
 // Icons
 import {
@@ -71,9 +72,12 @@ export class MenuBar extends Component {
           <IconButton aria-label="menu" size="small">
             <IoMdArrowDropdown color="white" className={classes.downIcon} />
           </IconButton>
-          <IconButton aria-label="menu" size="small">
-            <MdRefresh className={classes.blockIcons} />
-          </IconButton>
+          <Link href="/">
+            <IconButton aria-label="menu" size="small">
+              <MdRefresh className={classes.blockIcons} />
+            </IconButton>
+          </Link>
+
           <IconButton aria-label="menu" size="small">
             <MdMoreVert className={classes.blockIcons} />
           </IconButton>
