@@ -88,7 +88,7 @@ const styles = {
     paddingLeft: "2.5rem",
     borderTop: "1px solid #A9A9A9",
     width: "569px",
-   
+
     border: "0",
     backgroundColor: "#FFFFFF",
     color: "#000000",
@@ -129,6 +129,17 @@ export class Navbar extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
+    console.log("Search Text: " + event.target.value);
+    console.log("Results: ", this.handleSearchDB(event.target.value));
+  };
+
+  handleSearchDB = (keyword) => {
+    let results = test_data.filter((record) => {
+      if (record.title.search(keyword) !== -1) return record;
+      else if (record.title.search(keyword) !== -1) return record;
+      else return null;
+    });
+    return results;
   };
 
   showSearchResults = () => {
@@ -142,8 +153,6 @@ export class Navbar extends Component {
       searchResults: false,
     });
   };
-
-
 
   render() {
     const { classes } = this.props;
@@ -170,10 +179,13 @@ export class Navbar extends Component {
             placeholder="Search Report"
             onChange={this.handleChange}
             onFocus={this.showSearchResults}
-            onBlur = {this.hideSearchResults}
+            onBlur={this.hideSearchResults}
           ></input>
-          {searchResults && <div className={classes.searchResults}>
-            <Typography variant="body2">Start typing keyword...</Typography></div>}
+          {searchResults && (
+            <div className={classes.searchResults}>
+              <Typography variant="body2">Start typing keyword...</Typography>
+            </div>
+          )}
         </div>
 
         <div className={classes.block3}>
