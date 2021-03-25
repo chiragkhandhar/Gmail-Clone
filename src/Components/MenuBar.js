@@ -14,21 +14,31 @@ import {
   MdChevronLeft,
   MdChevronRight,
   MdLineWeight,
+  MdArrowBack,
+  MdArchive,
+  MdDelete,
+  MdLabel,
 } from "react-icons/md";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { RiSpam2Line } from "react-icons/ri";
 
 const styles = {
   container: {
     position: "fixed",
     top: "65px",
-    width: "100vw",
     height: "48px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
     backgroundColor: "#111111",
     zIndex: 1,
     borderBottom: "1px solid #363636",
+    display: "flex",
+    alignItems: "center",
+  },
+
+  blockWrapper: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100vw",
   },
 
   block1: {
@@ -43,7 +53,7 @@ const styles = {
     marginLeft: "1rem",
   },
 
-  block3: {
+  block2: {
     display: "flex",
     justifyContent: "flex-start",
     alignItems: "center",
@@ -59,47 +69,76 @@ const styles = {
 export class MenuBar extends Component {
   state = {
     count: 125,
+    openMenu: false,
   };
   render() {
     const { classes } = this.props;
-    const { count } = this.state;
+    const { count, openMenu } = this.state;
     return (
       <div className={classes.container}>
-        <div className={classes.block1}>
-          <IconButton aria-label="menu" size="small">
-            <MdCheckBoxOutlineBlank className={classes.blockIcons} />
-          </IconButton>
-          <IconButton aria-label="menu" size="small">
-            <IoMdArrowDropdown color="white" className={classes.downIcon} />
-          </IconButton>
-          <Link href="/">
-            <IconButton aria-label="menu" size="small">
-              <MdRefresh className={classes.blockIcons} />
-            </IconButton>
-          </Link>
+        {openMenu ? (
+          <div className={classes.blockWrapper}>
+            <div className={classes.block1}>
+              <IconButton aria-label="menu" size="small">
+                <MdCheckBoxOutlineBlank className={classes.blockIcons} />
+              </IconButton>
+              <IconButton aria-label="menu" size="small">
+                <IoMdArrowDropdown color="white" className={classes.downIcon} />
+              </IconButton>
+              <Link href="/">
+                <IconButton aria-label="menu" size="small">
+                  <MdRefresh className={classes.blockIcons} />
+                </IconButton>
+              </Link>
 
-          <IconButton aria-label="menu" size="small">
-            <MdMoreVert className={classes.blockIcons} />
-          </IconButton>
-        </div>
-        <div className={classes.block3}>
-          <Typography variant="overline">{`1-50 of ${count}`}</Typography>
-          <IconButton aria-label="menu" size="small" disabled>
-            <MdChevronLeft
-              className={classes.blockIcons}
-              style={{ color: "grey" }}
-            />
-          </IconButton>
-          <IconButton aria-label="menu" size="small">
-            <MdChevronRight className={classes.blockIcons} />
-          </IconButton>
-          <IconButton aria-label="menu" size="small">
-            <MdLineWeight className={classes.splitIcon} />
-          </IconButton>
-          <IconButton aria-label="menu" size="small">
-            <IoMdArrowDropdown color="white" className={classes.downIcon} />
-          </IconButton>
-        </div>
+              <IconButton aria-label="menu" size="small">
+                <MdMoreVert className={classes.blockIcons} />
+              </IconButton>
+            </div>
+            <div className={classes.block2}>
+              <Typography variant="overline">{`1-50 of ${count}`}</Typography>
+              <IconButton aria-label="menu" size="small" disabled>
+                <MdChevronLeft
+                  className={classes.blockIcons}
+                  style={{ color: "grey" }}
+                />
+              </IconButton>
+              <IconButton aria-label="menu" size="small">
+                <MdChevronRight className={classes.blockIcons} />
+              </IconButton>
+              <IconButton aria-label="menu" size="small">
+                <MdLineWeight className={classes.splitIcon} />
+              </IconButton>
+              <IconButton aria-label="menu" size="small">
+                <IoMdArrowDropdown color="white" className={classes.downIcon} />
+              </IconButton>
+            </div>
+          </div>
+        ) : (
+          <div className={classes.blockWrapper}>
+            <div className={classes.block1}>
+              <IconButton aria-label="menu" size="small">
+                <MdArrowBack className={classes.blockIcons} />
+              </IconButton>
+              <IconButton aria-label="menu" size="small">
+                <MdArchive className={classes.blockIcons} />
+              </IconButton>
+              <IconButton aria-label="menu" size="small">
+                <RiSpam2Line className={classes.blockIcons} />
+              </IconButton>
+              <IconButton aria-label="menu" size="small">
+                <MdDelete className={classes.blockIcons} />
+              </IconButton>
+              <IconButton aria-label="menu" size="small">
+                <MdLabel className={classes.blockIcons} />
+              </IconButton>
+              
+              <IconButton aria-label="menu" size="small">
+                <MdMoreVert className={classes.blockIcons} />
+              </IconButton>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
