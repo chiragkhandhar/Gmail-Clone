@@ -4,11 +4,13 @@ import React, { Component } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import IconButton from "@material-ui/core/IconButton";
 import Avatar from "@material-ui/core/Avatar";
+import test_data from "../Data/data.json";
 
 // Icons
 import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 import { MdHelpOutline } from "react-icons/md";
 import { IoSettingsOutline, IoApps } from "react-icons/io5";
+import { Typography } from "@material-ui/core";
 
 const styles = {
   conatiner: {
@@ -19,7 +21,7 @@ const styles = {
     justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "#111111",
-    zIndex: 1,
+    zIndex: 2,
     padding: "8px",
     borderBottom: "1px solid #363636",
   },
@@ -42,6 +44,7 @@ const styles = {
   },
 
   searchIcon: {
+    zIndex: 2,
     position: "absolute",
     left: "calc(238px + 35px)",
     height: "20px",
@@ -50,6 +53,7 @@ const styles = {
   },
 
   searchBox: {
+    zIndex: 1,
     width: "568px",
     height: "46px",
     outline: 0,
@@ -65,6 +69,7 @@ const styles = {
     "&:focus": {
       backgroundColor: "#FFFFFF",
       color: "#000000",
+      borderRadius: "9px 9px 0px 0px",
       boxshadow: `0 2.8px 2.2px rgba(0, 0, 0, 0.034),
                   0 6.7px 5.3px rgba(0, 0, 0, 0.048),
                   0 12.5px 10px rgba(0, 0, 0, 0.06),
@@ -72,6 +77,28 @@ const styles = {
                   0 41.8px 33.4px rgba(0, 0, 0, 0.086),
                   0 100px 80px rgba(0, 0, 0, 0.12)`,
     },
+  },
+
+  searchResults: {
+    position: "absolute",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    paddingLeft: "2.5rem",
+    borderTop: "1px solid #A9A9A9",
+    width: "569px",
+   
+    border: "0",
+    backgroundColor: "#FFFFFF",
+    color: "#000000",
+    borderRadius: "0px 0px 9px 9px",
+    boxshadow: `0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12)`,
   },
 
   block3: {
@@ -95,6 +122,7 @@ const styles = {
 export class Navbar extends Component {
   state = {
     searchText: "",
+    searchResults: false,
   };
 
   handleChange = (event) => {
@@ -103,8 +131,23 @@ export class Navbar extends Component {
     });
   };
 
+  showSearchResults = () => {
+    this.setState({
+      searchResults: true,
+    });
+  };
+
+  hideSearchResults = () => {
+    this.setState({
+      searchResults: false,
+    });
+  };
+
+
+
   render() {
     const { classes } = this.props;
+    const { searchResults } = this.state;
     return (
       <div className={classes.conatiner}>
         <div className={classes.block1}>
@@ -119,13 +162,19 @@ export class Navbar extends Component {
         </div>
 
         <AiOutlineSearch className={classes.searchIcon} />
-        <input
-          type="text"
-          name="searchText"
-          className={classes.searchBox}
-          placeholder="Search Report"
-          onChange={this.handleChange}
-        ></input>
+        <div className={classes.searchComponent}>
+          <input
+            type="text"
+            name="searchText"
+            className={classes.searchBox}
+            placeholder="Search Report"
+            onChange={this.handleChange}
+            onFocus={this.showSearchResults}
+            onBlur = {this.hideSearchResults}
+          ></input>
+          {searchResults && <div className={classes.searchResults}>
+            <Typography variant="body2">Start typing keyword...</Typography></div>}
+        </div>
 
         <div className={classes.block3}>
           <IconButton aria-label="menu">
@@ -137,7 +186,7 @@ export class Navbar extends Component {
           <IconButton aria-label="menu">
             <IoApps className={classes.block3Icon} />
           </IconButton>
-          <Avatar src="/akash_avatar.jpeg" className = {classes.avatar}></Avatar>
+          <Avatar src="/akash_avatar.jpeg" className={classes.avatar}></Avatar>
         </div>
       </div>
     );
