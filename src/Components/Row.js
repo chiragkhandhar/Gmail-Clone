@@ -89,7 +89,7 @@ export class Row extends Component {
     const { data, fav } = this.state;
     return (
       <div className={classes.container}>
-        <Checkbox className={classes.checkBox} />
+        <Checkbox className={classes.checkBox}/>
         {!fav ? (
           <IconButton aria-label="menu" onClick={this.favIT}>
             <AiOutlineStar className={classes.unFav} />
