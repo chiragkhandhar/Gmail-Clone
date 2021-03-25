@@ -19,6 +19,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
     marginLeft: "2rem",
+    marginRight: "2rem",
     marginTop: "2rem",
   },
 
@@ -47,7 +48,7 @@ export class ViewReport extends Component {
     return (
       <div className={classes.container}>
         <div className={classes.titleWrapper}>
-          <Typography variant="h4">{this.props.data.title}</Typography>
+          <Typography variant="h4" align="left">{this.props.data.title}</Typography>
           <Chip
             label={
               this.props.data.label === "good" ? "Good Report" : "Bad Report"
