@@ -18,16 +18,13 @@ const styles = {
     borderBottom: "1px solid #363636",
     paddingLeft: "1rem",
     paddingRight: "1rem",
-    zIndex: 0,
     "&:hover": {
-      zIndex: 2,
       backgroundColor: "#282828",
     },
   },
 
   checkBox: {
     color: "#838383",
-
     "&:hover": {
       color: "white",
     },
@@ -42,6 +39,10 @@ const styles = {
 
   fav: {
     color: "gold",
+  },
+
+  clickableArea: {
+    display: "flex",
   },
 
   title: {
@@ -69,6 +70,11 @@ export class Row extends Component {
   state = {
     data: this.props.data,
     fav: false,
+    openMode: false,
+  };
+
+  toggleOpenMode = () => {
+    this.props.setNoteData(this.props.data);
   };
 
   favIT = () => {
@@ -93,22 +99,24 @@ export class Row extends Component {
             <AiFillStar className={classes.fav} />
           </IconButton>
         )}
-        <Typography variant="body1" className={classes.title}>
-          {data.title}
-        </Typography>
 
-        <Typography variant="body1" className={classes.description}>
-          {formatDescriptionText(data.desc)}
-        </Typography>
-
-        <Chip
-          size="small"
-          label={data.label === "good" ? "Good Report" : "Bad Report"}
-          variant="outlined"
-          className={
-            data.label === "good" ? classes.goodLabel : classes.badLabel
-          }
-        />
+        <div className={classes.clickableArea} onClick={this.toggleOpenMode}>
+          {" "}
+          <Typography variant="body1" className={classes.title}>
+            {data.title}
+          </Typography>
+          <Typography variant="body1" className={classes.description}>
+            {formatDescriptionText(data.desc)}
+          </Typography>
+          <Chip
+            size="small"
+            label={data.label === "good" ? "Good Report" : "Bad Report"}
+            variant="outlined"
+            className={
+              data.label === "good" ? classes.goodLabel : classes.badLabel
+            }
+          />
+        </div>
       </div>
     );
   }

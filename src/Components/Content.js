@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 // Components
 import Row from "./Row";
-import test_data from "../Data/data.json"
+import ViewReport from "./ViewReport";
+import test_data from "../Data/data.json";
 
 // MUI Stuff
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -17,7 +18,7 @@ const styles = {
     position: "absolute",
     top: "114px",
     width: "100vw",
-    backgroundColor:"#111111"
+    backgroundColor: "#111111",
   },
   tabBar: {
     position: "fixed",
@@ -69,6 +70,8 @@ export class Content extends Component {
   state = {
     activeTab: 0,
     content: test_data,
+    openMode: false,
+    rowData: {},
   };
 
   handlePrimaryClick = () => {
@@ -89,11 +92,20 @@ export class Content extends Component {
     });
   };
 
+  setNoteData = (note_data) => {
+    this.setState({
+      openMode: true,
+      rowData: note_data,
+    });
+  };
+
   render() {
     const { classes } = this.props;
-    const { activeTab, content } = this.state;
+    const { openMode, activeTab, content, rowData } = this.state;
 
-    return (
+    return openMode ? (
+      <ViewReport data={rowData} />
+    ) : (
       <div className={classes.container}>
         <div className={classes.tabBar}>
           <div
@@ -133,16 +145,35 @@ export class Content extends Component {
 
         <div className={classes.content}>
           {activeTab === 0
-            ? content.map((rowData) => <Row key = {rowData.id} data = {rowData}/>)
+            ? content.map((rowData) => (
+                <Row
+                  key={rowData.id}
+                  data={rowData}
+                  setNoteData={this.setNoteData}
+                />
+              ))
             : activeTab === 1
             ? content.map(
-                (rowData) => rowData.label === "good" && <Row key = {rowData.id} data = {rowData}/>
+                (rowData) =>
+                  rowData.label === "good" && (
+                    <Row
+                      key={rowData.id}
+                      data={rowData}
+                      setNoteData={this.setNoteData}
+                    />
+                  )
               )
             : activeTab === 2 &&
               content.map(
-                (rowData) => rowData.label === "bad" && <Row key = {rowData.id} data = {rowData}/>
+                (rowData) =>
+                  rowData.label === "bad" && (
+                    <Row
+                      key={rowData.id}
+                      data={rowData}
+                      setNoteData={this.setNoteData}
+                    />
+                  )
               )}
-          
         </div>
       </div>
     );
