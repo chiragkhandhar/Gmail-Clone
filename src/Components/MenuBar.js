@@ -5,6 +5,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
+import Tooltip from "@material-ui/core/Tooltip";
 
 // Icons
 import {
@@ -71,12 +72,27 @@ export class MenuBar extends Component {
     count: 125,
     openMenu: false,
   };
+
+  toggleOpenMenu = () => {
+    this.setState({
+      openMenu: !this.state.openMenu,
+    });
+  };
+
+  handleBackPress = () => {
+    const note_data = {
+      id: 0,
+      title: "",
+      desc: "",
+    };
+    this.props.contentRef.current.setNoteData(note_data);
+  };
   render() {
     const { classes } = this.props;
     const { count, openMenu } = this.state;
     return (
       <div className={classes.container}>
-        {openMenu ? (
+        {!openMenu ? (
           <div className={classes.blockWrapper}>
             <div className={classes.block1}>
               <IconButton aria-label="menu" size="small">
@@ -117,25 +133,45 @@ export class MenuBar extends Component {
         ) : (
           <div className={classes.blockWrapper}>
             <div className={classes.block1}>
-              <IconButton aria-label="menu" size="small">
-                <MdArrowBack className={classes.blockIcons} />
-              </IconButton>
-              <IconButton aria-label="menu" size="small">
-                <MdArchive className={classes.blockIcons} />
-              </IconButton>
-              <IconButton aria-label="menu" size="small">
-                <RiSpam2Line className={classes.blockIcons} />
-              </IconButton>
-              <IconButton aria-label="menu" size="small">
-                <MdDelete className={classes.blockIcons} />
-              </IconButton>
-              <IconButton aria-label="menu" size="small">
-                <MdLabel className={classes.blockIcons} />
-              </IconButton>
-              
-              <IconButton aria-label="menu" size="small">
-                <MdMoreVert className={classes.blockIcons} />
-              </IconButton>
+              <Tooltip title="Back to Inbox">
+                <IconButton
+                  aria-label="menu"
+                  size="small"
+                  onClick={this.handleBackPress}
+                >
+                  <MdArrowBack className={classes.blockIcons} />
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip title="Archive">
+                <IconButton aria-label="menu" size="small">
+                  <MdArchive className={classes.blockIcons} />
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip title="Report Spam">
+                <IconButton aria-label="menu" size="small">
+                  <RiSpam2Line className={classes.blockIcons} />
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip title="Delete">
+                <IconButton aria-label="menu" size="small">
+                  <MdDelete className={classes.blockIcons} />
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip title="Label">
+                <IconButton aria-label="menu" size="small">
+                  <MdLabel className={classes.blockIcons} />
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip title="More">
+                <IconButton aria-label="menu" size="small">
+                  <MdMoreVert className={classes.blockIcons} />
+                </IconButton>
+              </Tooltip>
             </div>
           </div>
         )}

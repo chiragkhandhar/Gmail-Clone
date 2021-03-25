@@ -94,9 +94,10 @@ export class Content extends Component {
 
   setNoteData = (note_data) => {
     this.setState({
-      openMode: true,
+      openMode: !this.state.openMode,
       rowData: note_data,
     });
+    this.props.menuBarRef.current.toggleOpenMenu();
   };
 
   render() {
