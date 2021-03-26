@@ -1,6 +1,6 @@
 # Getting Started with Gmail-Clone
 
-Assessment for Segemed's Entrylevel Frontend Developer Position
+Assessment for Segmed's Entry-level Frontend Developer Position.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
