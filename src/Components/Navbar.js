@@ -88,7 +88,8 @@ const styles = {
     paddingLeft: "2.5rem",
     borderTop: "1px solid #A9A9A9",
     width: "569px",
-
+    maxHeight: "520px",
+    overflowY: "scroll",
     border: "0",
     backgroundColor: "#FFFFFF",
     color: "#000000",
@@ -99,6 +100,21 @@ const styles = {
     0 22.3px 17.9px rgba(0, 0, 0, 0.072),
     0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 100px 80px rgba(0, 0, 0, 0.12)`,
+  },
+
+  searchResultsRow: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    marginRight: "2.5rem",
+  },
+
+  searchRowText: {
+    cursor: "pointer",
+    height: "44px",
+    display: "flex",
+    alignItems: "center",
+    "&:hover": { backgroundColor: "#DDDDDD" },
   },
 
   block3: {
@@ -123,17 +139,20 @@ export class Navbar extends Component {
   state = {
     searchText: "",
     searchResults: false,
+    results: [],
   };
 
   handleChange = (event) => {
+    let results = this.searchDB(event.target.value);
+
     this.setState({
       [event.target.name]: event.target.value,
+      results: results,
+      searchResults: results.length > 0 ? true : false,
     });
-    console.log("Search Text: " + event.target.value);
-    console.log("Results: ", this.handleSearchDB(event.target.value));
   };
 
-  handleSearchDB = (keyword) => {
+  searchDB = (keyword) => {
     let results = test_data.filter((record) => {
       if (record.title.search(keyword) !== -1) return record;
       else if (record.title.search(keyword) !== -1) return record;
@@ -151,12 +170,14 @@ export class Navbar extends Component {
   hideSearchResults = () => {
     this.setState({
       searchResults: false,
+      results: [],
+      searchText: "",
     });
   };
 
   render() {
     const { classes } = this.props;
-    const { searchResults } = this.state;
+    const { searchText, searchResults, results } = this.state;
     return (
       <div className={classes.conatiner}>
         <div className={classes.block1}>
@@ -175,6 +196,7 @@ export class Navbar extends Component {
           <input
             type="text"
             name="searchText"
+            value={searchText}
             className={classes.searchBox}
             placeholder="Search Report"
             onChange={this.handleChange}
@@ -183,7 +205,21 @@ export class Navbar extends Component {
           ></input>
           {searchResults && (
             <div className={classes.searchResults}>
-              <Typography variant="body2">Start typing keyword...</Typography>
+              {results.length > 0 ? (
+                <div className={classes.searchResultsRow}>
+                  {results.map((rowData) => (
+                    <Typography
+                      variant="body1"
+                      align="left"
+                      className={classes.searchRowText}
+                    >
+                      {rowData.title.substring(0, 67) + "..."}
+                    </Typography>
+                  ))}
+                </div>
+              ) : (
+                <Typography variant="body2">Start typing keyword...</Typography>
+              )}
             </div>
           )}
         </div>
