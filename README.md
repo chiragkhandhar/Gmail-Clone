@@ -8,11 +8,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm install`
+#### `npm install`
 
 This is the very first command to execute before proceeding any further. It will install all the dependencies required for the project to run. 
 
-### `npm start`
+#### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -20,7 +20,15 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
---- 
+
+## Screenshots
+
+<img width="1792" alt="image" src="https://user-images.githubusercontent.com/37962354/112590738-504f7d00-8dd1-11eb-99b0-e08829ec3dad.png">
+
+<img width="1792" alt="image" src="https://user-images.githubusercontent.com/37962354/112590850-7c6afe00-8dd1-11eb-862d-81439d27d283.png">
+
+<img width="1792" alt="image" src="https://user-images.githubusercontent.com/37962354/112590934-9ad0f980-8dd1-11eb-9e0e-1c89a90e80c5.png">
+
 
 ## Learn More
 
