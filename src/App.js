@@ -10,7 +10,7 @@ function App() {
   const contentRef = useRef(null);
   return (
     <div className="App">
-      <Navbar />
+      <Navbar contentRef={contentRef}/>
       <MenuBar ref={menuBarRef} contentRef={contentRef} />
       <Content ref={contentRef} menuBarRef={menuBarRef} />
     </div>

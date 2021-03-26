@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 
+// Components
+import SearchResultRow from "./SearchResultRow";
+
 // MUI Stuff
 import withStyles from "@material-ui/core/styles/withStyles";
 import IconButton from "@material-ui/core/IconButton";
 import Avatar from "@material-ui/core/Avatar";
 import test_data from "../Data/data.json";
+import Tooltip from "@material-ui/core/Tooltip";
 
 // Icons
 import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
-import { MdHelpOutline } from "react-icons/md";
+import { MdHelpOutline, MdCancel } from "react-icons/md";
 import { IoSettingsOutline, IoApps } from "react-icons/io5";
 import { Typography } from "@material-ui/core";
 
@@ -109,12 +113,8 @@ const styles = {
     marginRight: "2.5rem",
   },
 
-  searchRowText: {
-    cursor: "pointer",
-    height: "44px",
-    display: "flex",
-    alignItems: "center",
-    "&:hover": { backgroundColor: "#DDDDDD" },
+  cancelBtn: {
+    color: "#FFFFFF",
   },
 
   block3: {
@@ -143,7 +143,12 @@ export class Navbar extends Component {
   };
 
   handleChange = (event) => {
-    let results = this.searchDB(event.target.value);
+    let results;
+    if (event.target.value !== "") {
+      results = this.searchDB(event.target.value);
+    } else {
+      results = [];
+    }
 
     this.setState({
       [event.target.name]: event.target.value,
@@ -175,6 +180,11 @@ export class Navbar extends Component {
     });
   };
 
+  setSND = (data) => {
+    this.props.contentRef.current.setNoteData(data);
+    this.hideSearchResults();
+  };
+
   render() {
     const { classes } = this.props;
     const { searchText, searchResults, results } = this.state;
@@ -192,7 +202,8 @@ export class Navbar extends Component {
         </div>
 
         <AiOutlineSearch className={classes.searchIcon} />
-        <div className={classes.searchComponent}>
+
+        <div>
           <input
             type="text"
             name="searchText"
@@ -201,26 +212,35 @@ export class Navbar extends Component {
             placeholder="Search Report"
             onChange={this.handleChange}
             onFocus={this.showSearchResults}
-            onBlur={this.hideSearchResults}
           ></input>
           {searchResults && (
             <div className={classes.searchResults}>
               {results.length > 0 ? (
                 <div className={classes.searchResultsRow}>
                   {results.map((rowData) => (
-                    <Typography
-                      variant="body1"
-                      align="left"
-                      className={classes.searchRowText}
-                    >
-                      {rowData.title.substring(0, 67) + "..."}
-                    </Typography>
+                    <SearchResultRow
+                      key={rowData.id}
+                      rowData={rowData}
+                      setSND={this.setSND}
+                    />
                   ))}
                 </div>
               ) : (
                 <Typography variant="body2">Start typing keyword...</Typography>
               )}
             </div>
+          )}
+          {searchResults && (
+            <Tooltip title="Clear Results">
+              <IconButton
+                aria-label="menu"
+                size="small"
+                className={classes.cancelBtn}
+                onClick={this.hideSearchResults}
+              >
+                <MdCancel />
+              </IconButton>
+            </Tooltip>
           )}
         </div>
 
