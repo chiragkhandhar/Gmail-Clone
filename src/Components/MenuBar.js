@@ -69,7 +69,7 @@ const styles = {
 };
 export class MenuBar extends Component {
   state = {
-    count: 125,
+    count: 150,
     openMenu: false,
   };
 
@@ -101,11 +101,13 @@ export class MenuBar extends Component {
               <IconButton aria-label="menu" size="small">
                 <IoMdArrowDropdown color="white" className={classes.downIcon} />
               </IconButton>
-              <Link href="/">
-                <IconButton aria-label="menu" size="small">
-                  <MdRefresh className={classes.blockIcons} />
-                </IconButton>
-              </Link>
+              <Tooltip title="Refresh">
+                <Link href="/">
+                  <IconButton aria-label="menu" size="small">
+                    <MdRefresh className={classes.blockIcons} />
+                  </IconButton>
+                </Link>
+              </Tooltip>
 
               <IconButton aria-label="menu" size="small">
                 <MdMoreVert className={classes.blockIcons} />
@@ -143,35 +145,25 @@ export class MenuBar extends Component {
                 </IconButton>
               </Tooltip>
 
-              <Tooltip title="Archive">
-                <IconButton aria-label="menu" size="small">
-                  <MdArchive className={classes.blockIcons} />
-                </IconButton>
-              </Tooltip>
+              <IconButton aria-label="menu" size="small">
+                <MdArchive className={classes.blockIcons} />
+              </IconButton>
 
-              <Tooltip title="Report Spam">
-                <IconButton aria-label="menu" size="small">
-                  <RiSpam2Line className={classes.blockIcons} />
-                </IconButton>
-              </Tooltip>
+              <IconButton aria-label="menu" size="small">
+                <RiSpam2Line className={classes.blockIcons} />
+              </IconButton>
 
-              <Tooltip title="Delete">
-                <IconButton aria-label="menu" size="small">
-                  <MdDelete className={classes.blockIcons} />
-                </IconButton>
-              </Tooltip>
+              <IconButton aria-label="menu" size="small">
+                <MdDelete className={classes.blockIcons} />
+              </IconButton>
 
-              <Tooltip title="Label">
-                <IconButton aria-label="menu" size="small">
-                  <MdLabel className={classes.blockIcons} />
-                </IconButton>
-              </Tooltip>
+              <IconButton aria-label="menu" size="small">
+                <MdLabel className={classes.blockIcons} />
+              </IconButton>
 
-              <Tooltip title="More">
-                <IconButton aria-label="menu" size="small">
-                  <MdMoreVert className={classes.blockIcons} />
-                </IconButton>
-              </Tooltip>
+              <IconButton aria-label="menu" size="small">
+                <MdMoreVert className={classes.blockIcons} />
+              </IconButton>
             </div>
           </div>
         )}
